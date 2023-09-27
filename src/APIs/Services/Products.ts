@@ -6,6 +6,9 @@ export class ProductService extends HttpClient {
   }
 
   async getProductList(){
-    return await this.get('all')
+   const token=localStorage.getItem("adminToken")
+    return await this.get('all',{headers: {
+      Authorization: `Bearer  ${token}`
+    }})
   }
 }

@@ -7,8 +7,8 @@ export class HttpClient{
         this.baseUrl=url;
     }
 
-    async get(endpoint:string){
-        return await axios.get(`${this.baseUrl}/${endpoint}`);
+    async get(endpoint:string,header:any){
+        return await axios.get(`${this.baseUrl}/${endpoint}`,header);
     }
 
     async post(endpoint:string,body:any){

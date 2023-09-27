@@ -1,3 +1,30 @@
 export const ROUTES={
-    LOGIN:"/login"
+    LOGIN:"/login",
+    DASHBOARD:"/",
+    PRODUCT:{
+        LIST:"/products",
+        CREATE:"/product-create",
+        EDIT:"/product-edit"
+    },
+    CATEGORY:{
+        LIST:"/categories",
+        CREATE:"/category-create",
+        EDIT:"/category-edit"
+    },
+    BRAND:{
+        LIST:"/brands",
+        CREATE:"/brand-create",
+        EDIT:"/brand-edit"
+    },
+    USER:{
+        LIST:"/users"
+    },
+    ORDER:{
+        LIST:"/orders",
+        EDIT:"/order-edit"
+    },
+    STORE_DATA:{
+        LIST:"/store-data",
+        EDIT:"/store-data-edit"
+    }
 }

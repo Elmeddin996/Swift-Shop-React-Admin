@@ -1,15 +1,17 @@
-import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.scss";
 import { AdminRoutes } from "./routes";
 import { BrowserRouter } from "react-router-dom";
-import SidebarWithHeader from "./app/components/SideBar";
 
-function App() {
+const queryClient = new QueryClient();
+
+const App:React.FC=()=>{
   return (
+    <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <SidebarWithHeader />
       <AdminRoutes />
     </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

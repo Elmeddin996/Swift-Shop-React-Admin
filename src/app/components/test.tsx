@@ -8,7 +8,7 @@ type FormValues = {
   file_: FileList
 }
 
-export const Application = () => {
+export const Application:React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
   const onSubmit = handleSubmit((data:any) => console.log('On Submit: ', data))
 
