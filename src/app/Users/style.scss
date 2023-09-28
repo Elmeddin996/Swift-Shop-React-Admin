@@ -1,3 +1,23 @@
-.table{
-    border: solid black 1px;
+.table-container {
+  min-height: 500px;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+
+  .table {
+    Td {
+      margin: 5px 0;
+      border-bottom: solid darkgray 1px;
+
+      .detail-btn {
+        background-color: black !important;
+        color: white;
+      }
+
+      .detail-btn:hover {
+        background-color: white !important;
+        color: black;
+      }
+    }
+  }
 }

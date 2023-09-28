@@ -13,41 +13,72 @@ import {
 import React from "react";
 import { useAuthentication } from "../../hooks";
 import { IUser } from "../../models";
-import "./style.scss"
+import "./style.scss";
 import { ModalDetail } from "../components/UserModal";
+import { Pagination } from "../components/Pagination";
 
-export const Users:React.FC = () => {
+export const Users: React.FC = () => {
   const { userList } = useAuthentication();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedUser, setSelectedUser] = React.useState<IUser>();
 
+  const [activePage, setActivePage] = React.useState<number>(1);
+  const startIndex = (activePage - 1) * 7;
+  const slicedUsers = userList?.data.slice(startIndex, startIndex + 7);
+  const totalPages = Math.ceil(userList?.data.length / 7);
+
+  const handlePageChange = (page: number) => {
+    setActivePage(page);
+  };
   return (
     <div>
-      <TableContainer>
+      <TableContainer className="table-container">
         <Table size="sm">
           <Thead>
             <Tr>
-              <Th>UserName</Th>
+              <Th>FullName</Th>
               <Th>Email</Th>
               <Th>Phone</Th>
               <Th>Action</Th>
             </Tr>
           </Thead>
-          {userList?.data.map((user:IUser) => {
+          {slicedUsers?.map((user: IUser) => {
             return (
-              <Tbody className="table">
+              <Tbody key={user.id} className="table">
                 <Tr>
-                  <Td>{user.userName}</Td>
+                  <Td>{user.fullName}</Td>
                   <Td>{user.email}</Td>
                   <Td>{user.phone}</Td>
-                  <Td><Button onClick={()=>onOpen()}>Detail</Button></Td>
+                  <Td>
+                    <Button
+                    className="detail-btn"
+                      onClick={() => {
+                        onOpen();
+                        setSelectedUser(user);
+                      }}
+                    >
+                      Detail
+                    </Button>
+                  </Td>
                 </Tr>
-                <ModalDetail user={user} isOpen={isOpen}  onClose={onClose}/>
               </Tbody>
             );
           })}
-          <Tfoot>pagination</Tfoot>
+          <Tfoot></Tfoot>
         </Table>
+        <Pagination
+          activePage={activePage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </TableContainer>
+      {selectedUser && (
+        <ModalDetail
+          user={selectedUser}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
+      )}
     </div>
   );
 };

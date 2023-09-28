@@ -16,6 +16,8 @@ import {
 import { FiMenu, FiBell, FiChevronDown } from "react-icons/fi";
 import { useMutation } from "react-query";
 import { useService } from "../../../APIs/Services";
+import { ROUTES } from "../../../routes/consts";
+import { useNavigate } from "react-router-dom";
 
 interface IMobileProps extends FlexProps {
   onOpen: () => void;
@@ -23,12 +25,13 @@ interface IMobileProps extends FlexProps {
 
 export const MobileNav:React.FC<IMobileProps> = ({ onOpen, ...rest }) => {
 const {accountService}=useService()
+const navigate = useNavigate()
 
   const { mutateAsync: mutateLogout } = useMutation(() =>
   accountService.logout())
 
 const handleLogout=()=>{
-  mutateLogout().catch((err)=>console.log(err))
+  mutateLogout().then(()=>navigate(ROUTES.LOGIN)).catch((err)=>console.log(err))
 }
 
   return (

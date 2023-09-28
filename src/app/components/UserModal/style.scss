@@ -1,6 +1,26 @@
-.modal-body{
-    span{
-        font-size: larger;
-        font-weight: 600;
-    }
+.modal-body {
+  span {
+    font-size: larger;
+    font-weight: 600;
+  }
+
+  .confimed-email {
+    color: darkgreen;
+  }
+  .confimed-not-email {
+    color: red;
+  }
+}
+.modal-footer {
+  display: flex;
+  justify-content: space-around !important;
+  .delete-btn {
+    width: 80%;
+    background-color: rgb(248, 109, 109) !important;
+  }
+
+  .delete-btn:hover {
+    background-color: black !important;
+    color: white;
+  }
 }

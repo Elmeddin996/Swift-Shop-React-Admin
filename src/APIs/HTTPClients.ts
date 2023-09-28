@@ -11,6 +11,10 @@ export class HttpClient{
         return await axios.get(`${this.baseUrl}/${endpoint}`,header);
     }
 
+    async getById(endpoint:string,id:string|number,header:any){
+        return await axios.get(`${this.baseUrl}/${endpoint}/${id}`,header);
+    }
+
     async post(endpoint:string,body:any){
         return await axios.post(`${this.baseUrl}/${endpoint}`,body);
     }
@@ -19,7 +23,7 @@ export class HttpClient{
         return await axios.put(`${this.baseUrl}/${endpoint}`,body);
     }
 
-    async delete(endpoint:string,id:number|string,header:any){
-        return await axios.delete(`${this.baseUrl}/${endpoint}/${id}`,header)
+    async delete(endpoint:string,uniqueKey:number|string,header:any){
+        return await axios.delete(`${this.baseUrl}/${endpoint}/${uniqueKey}`,header)
     }
 }
