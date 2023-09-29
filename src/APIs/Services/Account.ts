@@ -34,9 +34,9 @@ export class AccountService extends HttpClient {
     });
   }
 
-  async userById(id: string) {
+  async userData() {
     const token = localStorage.getItem("adminToken");
-    return await this.getById(`Auth`, id, {
+    return await this.get(`Auth/UserData`, {
       headers: {
         Authorization: `Bearer  ${token}`,
       },

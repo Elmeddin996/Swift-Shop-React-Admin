@@ -25,6 +25,7 @@ export const Login: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  
   const onSubmit: SubmitHandler<Inputs> = (data:ILogin) => mutateLogin(data).catch((err)=>console.log(err))
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>

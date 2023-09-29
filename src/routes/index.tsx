@@ -12,6 +12,7 @@ import { Orders } from "../app/Orders";
 import { StoreDatas } from "../app/StoreDatas";
 import { AccountProvider } from "../context/AccountContext";
 import { Login } from "../app/Login";
+import { BrandProvider } from "../context/BrandContext";
 
 export const AdminRoutes: React.FC = () => {
   return (
@@ -54,7 +55,9 @@ export const AdminRoutes: React.FC = () => {
         path={ROUTES.BRAND.LIST}
         element={
           <SidebarWithHeader>
-            <Brands />
+            <BrandProvider>
+              <Brands />
+            </BrandProvider>
           </SidebarWithHeader>
         }
       />

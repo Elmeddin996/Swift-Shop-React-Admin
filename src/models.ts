@@ -13,3 +13,8 @@ export interface IUser {
   isAdmin: boolean;
   emailConfirm: boolean;
 }
+
+export interface IBrand{
+  id:number;
+  name:string;
+}

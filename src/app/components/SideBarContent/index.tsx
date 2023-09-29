@@ -18,6 +18,9 @@ import {
 import { IconType } from "react-icons";
 import { NavItem } from "../NavItem";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
+import { EQueryKeys } from "../../../enums";
+import { useService } from "../../../APIs/Services";
 
 interface ISidebarProps extends BoxProps {
   onClose: () => void;
@@ -26,21 +29,30 @@ interface ISidebarProps extends BoxProps {
 interface ILinkItemProps {
   name: string;
   icon: IconType;
-  path:string;
+  path: string;
 }
 
 const LinkItems: Array<ILinkItemProps> = [
-  { name: "Dashboard", icon: FiHome ,path:"/"},
-  { name: "Products", icon: FiPackage,path:"/products"},
-  { name: "Categories", icon: FiLayers,path:"/categories"},
-  { name: "Brands", icon: FiBold, path:"/brands" },
-  { name: "Users", icon: FiUser,path:"/users" },
-  { name: "Orders", icon: FiTruck,path:"/orders" },
-  { name: "Store Data", icon: FiSettings,path:"/store-data" },
+  { name: "Dashboard", icon: FiHome, path: "/" },
+  { name: "Products", icon: FiPackage, path: "/products" },
+  { name: "Categories", icon: FiLayers, path: "/categories" },
+  { name: "Brands", icon: FiBold, path: "/brands" },
+  { name: "Users", icon: FiUser, path: "/users" },
+  { name: "Orders", icon: FiTruck, path: "/orders" },
+  { name: "Store Data", icon: FiSettings, path: "/store-data" },
 ];
 
-export const SidebarContent:React.FC<ISidebarProps> = ({ onClose, ...rest }) => {
-  const navigate = useNavigate()
+export const SidebarContent: React.FC<ISidebarProps> = ({
+  onClose,
+  ...rest
+}) => {
+  const navigate = useNavigate();
+  const { storeDataService } = useService();
+
+  const { data: storeDatas } = useQuery([EQueryKeys.GET_STORE_DATA], () =>
+    storeDataService.getSiteDatas()
+  );
+
   return (
     <Box
       transition="3s ease"
@@ -53,13 +65,25 @@ export const SidebarContent:React.FC<ISidebarProps> = ({ onClose, ...rest }) => 
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+        <img
+          src={storeDatas?.data.logoImageLink}
+          alt="logo"
+          style={{ width: "30%" }}
+        />
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          {storeDatas?.data.logoText}
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={()=>navigate(link.path)}>
+        <NavItem
+          key={link.name}
+          icon={link.icon}
+          onClick={() =>{
+             navigate(link.path)
+             onClose()
+            }}
+        >
           {link.name}
         </NavItem>
       ))}

@@ -104,7 +104,9 @@ export const ModalDetail: React.FC<IModal> = ({ user, isOpen, onClose }) => {
         </ModalBody>
         <ModalFooter className="modal-footer">
           <Button
+            isDisabled={user.isAdmin}
             className="delete-btn"
+
             onClick={() => handleDeleteUser(user.email)}
           >
             Delete User

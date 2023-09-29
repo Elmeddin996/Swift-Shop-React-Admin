@@ -12,27 +12,40 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Image,
 } from "@chakra-ui/react";
-import { FiMenu, FiBell, FiChevronDown } from "react-icons/fi";
-import { useMutation } from "react-query";
+import { FiMenu, FiBell, FiChevronDown, FiUser } from "react-icons/fi";
+import { useMutation, useQuery } from "react-query";
 import { useService } from "../../../APIs/Services";
 import { ROUTES } from "../../../routes/consts";
 import { useNavigate } from "react-router-dom";
+import { EQueryKeys } from "../../../enums";
 
 interface IMobileProps extends FlexProps {
   onOpen: () => void;
 }
 
-export const MobileNav:React.FC<IMobileProps> = ({ onOpen, ...rest }) => {
-const {accountService}=useService()
-const navigate = useNavigate()
+export const MobileNav: React.FC<IMobileProps> = ({ onOpen, ...rest }) => {
+  const { accountService, storeDataService } = useService();
+  const navigate = useNavigate();
 
   const { mutateAsync: mutateLogout } = useMutation(() =>
-  accountService.logout())
+    accountService.logout()
+  );
 
-const handleLogout=()=>{
-  mutateLogout().then(()=>navigate(ROUTES.LOGIN)).catch((err)=>console.log(err))
-}
+  const handleLogout = () => {
+    mutateLogout()
+      .then(() => navigate(ROUTES.LOGIN))
+      .catch((err) => console.log(err));
+  };
+
+  const { data: user } = useQuery([EQueryKeys.GET_USER], () =>
+    accountService.userData()
+  );
+
+  const { data: storeDatas } = useQuery([EQueryKeys.GET_STORE_DATA], () =>
+    storeDataService.getSiteDatas()
+  );
 
   return (
     <Flex
@@ -54,22 +67,27 @@ const handleLogout=()=>{
         icon={<FiMenu />}
       />
 
-      <Text
-        display={{ base: "flex", md: "none" }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold"
+      <Box
+        style={{ display: "flex", alignItems: "center" }}
+        display={{ md: "none" }}
       >
-        Logo
-      </Text>
+        <Image
+          src={storeDatas?.data.logoImageLink}
+          alt="logo"
+          display={{ md: "none" }}
+          style={{ width: "18%" }}
+        />
+        <Text
+          display={{ base: "flex", md: "none" }}
+          fontSize="2xl"
+          fontFamily="monospace"
+          fontWeight="bold"
+        >
+          {storeDatas?.data.logoText}
+        </Text>
+      </Box>
 
       <HStack spacing={{ base: "0", md: "6" }}>
-        <IconButton
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={<FiBell />}
-        />
         <Flex alignItems={"center"}>
           <Menu>
             <MenuButton
@@ -78,19 +96,14 @@ const handleLogout=()=>{
               _focus={{ boxShadow: "none" }}
             >
               <HStack>
-                <Avatar
-                  size={"sm"}
-                  src={
-                    "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                  }
-                />
+                <FiUser size="40" />
                 <VStack
                   display={{ base: "none", md: "flex" }}
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">{user?.data.fullName}</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
