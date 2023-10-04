@@ -15,6 +15,26 @@ export class BrandService extends HttpClient {
     });
   }
 
+  async getBrandById(id: number | undefined) {
+    if (id !== undefined) {
+      const token = localStorage.getItem("adminToken");
+      return await this.getById(`Brands`, id, {
+        headers: {
+          Authorization: `Bearer  ${token}`,
+        },
+      });
+    }
+  }
+
+  async createBrand(body: Object) {
+    const token = localStorage.getItem("adminToken");
+    return await this.postWithToken("Brands", body, {
+      headers: {
+        Authorization: `Bearer  ${token}`,
+      },
+    });
+  }
+
   async editBrand(body: IBrand) {
     const token = localStorage.getItem("adminToken");
     return await this.put(`Brands/Edit`, body, {

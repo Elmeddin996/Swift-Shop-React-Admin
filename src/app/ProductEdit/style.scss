@@ -1,0 +1,9 @@
+.image-container{
+    display: flex!important;
+    width: 100%;
+    flex-wrap: wrap;
+    img{
+        margin: 5px;
+        width: 120px;
+    }
+}

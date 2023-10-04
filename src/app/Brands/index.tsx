@@ -1,5 +1,6 @@
 import {
   Button,
+  Divider,
   Table,
   TableContainer,
   Tbody,
@@ -16,10 +17,12 @@ import { IBrand } from "../../models";
 import { Pagination } from "../components/Pagination";
 import Swal from "sweetalert2";
 import { BrandModal } from "../components/BrandModal";
+import "./style.scss";
 
 export const Brands = () => {
   const { brandList, mutateDeleteBrand } = useBrandContext();
-  const [selectedBrand, setSelectedBrand] = React.useState<IBrand>();
+  const [brandId, setBrandId] = React.useState<number>();
+  const [isEditOrCreate, setIsEditOrCreate] = React.useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [activePage, setActivePage] = React.useState<number>(1);
@@ -31,10 +34,10 @@ export const Brands = () => {
     setActivePage(page);
   };
 
-  const handleDeleteUser = (id: number) => {
+  const handleDeleteBrand = (id: number) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You can't take it back!",
+      text: "You can't take it back! There are products of this brand. Are you sure you want to delete it?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#506ba5",
@@ -50,6 +53,16 @@ export const Brands = () => {
 
   return (
     <div>
+      <Button
+        className="create-btn"
+        onClick={() => {
+          setIsEditOrCreate("create");
+          onOpen();
+        }}
+      >
+        Create New Brand
+      </Button>
+      <Divider />
       <TableContainer className="table-container">
         <Table size="sm">
           <Thead>
@@ -73,14 +86,17 @@ export const Brands = () => {
                       className="detail-btn"
                       onClick={() => {
                         onOpen();
-                        setSelectedBrand(brand);
+                        setBrandId(brand.id);
+                        setIsEditOrCreate("edit");
                       }}
                     >
                       Edit
                     </Button>
                     <Button
                       className="detail-btn"
-                      onClick={() => handleDeleteUser(brand.id)}
+                      onClick={() => {
+                        handleDeleteBrand(brand.id);
+                      }}
                     >
                       Delete
                     </Button>
@@ -97,9 +113,7 @@ export const Brands = () => {
           onPageChange={handlePageChange}
         />
       </TableContainer>
-      {selectedBrand && (
-        <BrandModal brand={selectedBrand} isOpen={isOpen} onClose={onClose} />
-      )}
+      {isOpen && <BrandModal editOrCreate={isEditOrCreate} id={brandId} isOpen={isOpen} onClose={onClose} />}
     </div>
   );
 };

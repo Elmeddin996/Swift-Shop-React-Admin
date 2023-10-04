@@ -14,10 +14,9 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { IBrand } from "../../../models";
+import { ICategory } from "../../../models";
 import Swal from "sweetalert2";
-import { useBrandContext } from "../../../hooks";
-import "./style.scss";
+import { useCategoryContext } from "../../../hooks";
 
 interface IModal {
   id?: number;
@@ -31,13 +30,13 @@ type Inputs = {
   name: string;
 };
 
-export const BrandModal: React.FC<IModal> = ({
+export const CategoryModal: React.FC<IModal> = ({
   id,
   isOpen,
   onClose,
   editOrCreate,
 }) => {
-  const { mutateEditBrand, brandList, mutateCreateBrand } = useBrandContext();
+  const { mutateEditCategory, categoryList, mutateCreateCategory } = useCategoryContext();
 
   const {
     register,
@@ -54,13 +53,13 @@ export const BrandModal: React.FC<IModal> = ({
     />
   );
 
-  const onSubmit: SubmitHandler<Inputs> = (data: IBrand) => {
+  const onSubmit: SubmitHandler<Inputs> = (data: ICategory) => {
     if (editOrCreate === "edit") {
       const reqBody = {
         id: id,
         name: data.name,
       };
-      mutateEditBrand(reqBody)
+      mutateEditCategory(reqBody)
         .then(onClose)
         .then(() =>
           Swal.fire("Changed!", "Data changed successfully.", "success")
@@ -70,7 +69,7 @@ export const BrandModal: React.FC<IModal> = ({
       const reqBody = {
         name: data.name,
       };
-      mutateCreateBrand(reqBody)
+      mutateCreateCategory(reqBody)
         .then(onClose)
         .then(() =>
           Swal.fire("Created!", "Data created successfully.", "success")
@@ -79,8 +78,8 @@ export const BrandModal: React.FC<IModal> = ({
     }
   };
 
-  const brand: IBrand[] = brandList?.data.filter(
-    (brand: IBrand) => brand.id === id
+  const category: ICategory[] = categoryList?.data.filter(
+    (category: ICategory) => category.id === id
   );
 
   return (
@@ -88,15 +87,15 @@ export const BrandModal: React.FC<IModal> = ({
       <Overlay />
       <form onSubmit={handleSubmit(onSubmit)}>
         <ModalContent>
-          <ModalHeader>{editOrCreate==="edit"?"Edit Brand":"Create New Brand"}</ModalHeader>
+          <ModalHeader>{editOrCreate==="edit"?"Edit Category":"Create New Category"}</ModalHeader>
           <ModalCloseButton />
           <ModalBody className="modal-body">
             <FormControl id="name">
               <FormLabel>Name</FormLabel>
               <Input
                 type="text"
-                placeholder="Enter Brand Name"
-                defaultValue={editOrCreate === "edit" ? brand[0]?.name:""}
+                placeholder="Enter Category Name"
+                defaultValue={editOrCreate === "edit" ? category[0]?.name:""}
                 {...register("name", {
                   required: "Name is required!",
                   minLength: {

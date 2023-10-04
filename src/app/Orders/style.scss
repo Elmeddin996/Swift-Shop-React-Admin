@@ -1,0 +1,13 @@
+.pending {
+  background-color: rgba(255, 166, 0, 0.699);
+}
+.accepted {
+  background-color: rgba(0, 128, 0, 0.699);
+}
+.rejected {
+  background-color: rgba(255, 0, 0, 0.699);
+}
+.status {
+  width: 50px;
+  border-radius: 15%;
+}

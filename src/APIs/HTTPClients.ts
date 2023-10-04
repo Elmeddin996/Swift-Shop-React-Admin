@@ -18,8 +18,11 @@ export class HttpClient {
     return await axios.post(`${this.baseUrl}/${endpoint}`, body);
   }
 
+  async postWithToken(endpoint: string, body: any, header: any) {
+    return await axios.post(`${this.baseUrl}/${endpoint}`, body, header);
+  }
+
   async put(endpoint: string, body: any, header: any) {
-    console.log(body);
     return await axios.put(`${this.baseUrl}/${endpoint}`, body, header);
   }
 

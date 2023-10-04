@@ -13,6 +13,11 @@ import { StoreDatas } from "../app/StoreDatas";
 import { AccountProvider } from "../context/AccountContext";
 import { Login } from "../app/Login";
 import { BrandProvider } from "../context/BrandContext";
+import { CategoryProvider } from "../context/CategoryContext";
+import { ProductProvider } from "../context/ProductContext";
+import { ProductCreate } from "../app/ProductCreate";
+import { OrderProvider } from "../context/OrderContext";
+import { ProductEdit } from "../app/ProductEdit";
 
 export const AdminRoutes: React.FC = () => {
   return (
@@ -39,7 +44,30 @@ export const AdminRoutes: React.FC = () => {
         path={ROUTES.PRODUCT.LIST}
         element={
           <SidebarWithHeader>
-            <Products />
+            <ProductProvider>
+              <Products />
+            </ProductProvider>
+          </SidebarWithHeader>
+        }
+      />
+
+      <Route
+        path={ROUTES.PRODUCT.CREATE}
+        element={
+          <SidebarWithHeader>
+            <ProductProvider>
+              <ProductCreate />
+            </ProductProvider>
+          </SidebarWithHeader>
+        }
+      />
+      <Route
+        path={`${ROUTES.PRODUCT.EDIT}/:id`}
+        element={
+          <SidebarWithHeader>
+            <ProductProvider>
+              <ProductEdit />
+            </ProductProvider>
           </SidebarWithHeader>
         }
       />
@@ -47,7 +75,9 @@ export const AdminRoutes: React.FC = () => {
         path={ROUTES.CATEGORY.LIST}
         element={
           <SidebarWithHeader>
-            <Categories />
+            <CategoryProvider>
+              <Categories />
+            </CategoryProvider>
           </SidebarWithHeader>
         }
       />
@@ -75,7 +105,9 @@ export const AdminRoutes: React.FC = () => {
         path={ROUTES.ORDER.LIST}
         element={
           <SidebarWithHeader>
-            <Orders />
+            <OrderProvider>
+              <Orders />
+            </OrderProvider>
           </SidebarWithHeader>
         }
       />

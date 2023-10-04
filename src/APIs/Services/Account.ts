@@ -6,7 +6,6 @@ export class AccountService extends HttpClient {
     super(`https://localhost:7267/api`);
   }
   async login(body: ILogin) {
-    console.log(body);
     return await this.post(`Auth/loginadmin`, body).then(({ data }) => {
       localStorage.setItem("adminToken", data.token);
       localStorage.setItem("adminUserId", data.userId);

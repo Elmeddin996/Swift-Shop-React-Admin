@@ -1,0 +1,16 @@
+form {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  .submit-btn {
+    width: 60%;
+    background-color: black !important;
+    color: white !important;
+  }
+
+  .submit-btn:hover {
+    background-color: white !important;
+    color: black !important;
+  }
+}

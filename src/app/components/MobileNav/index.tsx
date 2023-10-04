@@ -1,6 +1,5 @@
 import {
   IconButton,
-  Avatar,
   Box,
   Flex,
   HStack,
@@ -14,7 +13,7 @@ import {
   MenuList,
   Image,
 } from "@chakra-ui/react";
-import { FiMenu, FiBell, FiChevronDown, FiUser } from "react-icons/fi";
+import { FiMenu, FiChevronDown, FiUser } from "react-icons/fi";
 import { useMutation, useQuery } from "react-query";
 import { useService } from "../../../APIs/Services";
 import { ROUTES } from "../../../routes/consts";

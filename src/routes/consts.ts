@@ -7,24 +7,23 @@ export const ROUTES={
         EDIT:"/product-edit"
     },
     CATEGORY:{
-        LIST:"/categories",
-        CREATE:"/category-create",
-        EDIT:"/category-edit"
+        LIST:"/categories"
     },
     BRAND:{
-        LIST:"/brands",
-        CREATE:"/brand-create",
-        EDIT:"/brand-edit"
+        LIST:"/brands"
     },
     USER:{
         LIST:"/users"
     },
     ORDER:{
-        LIST:"/orders",
-        EDIT:"/order-edit"
+        LIST:"/orders"
     },
     STORE_DATA:{
         LIST:"/store-data",
         EDIT:"/store-data-edit"
-    }
+    },
+    SLIDER:{
+        LIST:"/sliders"
+    },
+   
 }
