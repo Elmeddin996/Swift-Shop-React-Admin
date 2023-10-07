@@ -12,4 +12,13 @@ export class StoreDataService extends HttpClient {
       },
     });
   }
+
+  async editStoreData(body: FormData) {
+    const token = localStorage.getItem("adminToken");
+    return await this.put("StoreDatas/Edit", body, {
+      headers: {
+        Authorization: `Bearer  ${token}`,
+      },
+    });
+  }
 }

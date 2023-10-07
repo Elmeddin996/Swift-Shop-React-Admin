@@ -76,3 +76,24 @@ export interface ICreateProduct {
   brandId: number| undefined;
   categoryId: number| undefined;
 }
+
+export interface IStoreDatas {
+  phone: string;
+  address: string;
+  logoText: string;
+  companyName: string;
+  aboutCompany: string;
+  whatsappLink: string;
+  instagramLink: string;
+  facebookLink: string;
+  linkedinLink: string;
+  logoImageLink: string;
+};
+
+export interface ISlider{
+  id:number;
+  title:string;
+  desc:string;
+  imageName:string;
+  imageUrl:string;
+}

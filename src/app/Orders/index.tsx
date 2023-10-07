@@ -15,9 +15,10 @@ import { IOrder } from "../../models";
 import { Pagination } from "../components/Pagination";
 import "./style.scss";
 import { OrderModal } from "../components/OrderModal";
+import Swal from "sweetalert2";
 
 export const Orders: React.FC = () => {
-  const { orderList } = useOrderContext();
+  const { orderList ,mutateDeleteOrder} = useOrderContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedOrder, setSelectedOrder] = React.useState<IOrder>();
 
@@ -28,6 +29,25 @@ export const Orders: React.FC = () => {
   const handlePageChange = (page: number) => {
     setActivePage(page);
   };
+
+  const handleDeleteOrder = (id: number) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You can't take it back!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#506ba5",
+      cancelButtonColor: "#f16969",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Order has been deleted.", "success");
+        mutateDeleteOrder(id).catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
+      }
+    });
+    
+  };
+
 
   return (
     <div>
@@ -92,7 +112,7 @@ export const Orders: React.FC = () => {
                     }}>
                       Detail
                     </Button>
-                    <Button className="detail-btn" onClick={() => {}}>
+                    <Button className="detail-btn" onClick={() => handleDeleteOrder(order.id)}>
                       Delete
                     </Button>
                   </Td>

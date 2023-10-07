@@ -8,4 +8,6 @@ export enum EQueryKeys{
     GET_PRODUCT_LIST="getproductlist",
     GET_PRODUCT="getproduct",
     GET_ORDER_LIST="getproductlist",
+    GET_SLIDER_LIST="getsliderlist",
+    GET_SLIDER="getslider",
 }

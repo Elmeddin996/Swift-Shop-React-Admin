@@ -14,6 +14,7 @@ import {
   FiUser,
   FiTruck,
   FiSettings,
+  FiFastForward,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { NavItem } from "../NavItem";
@@ -39,6 +40,7 @@ const LinkItems: Array<ILinkItemProps> = [
   { name: "Brands", icon: FiBold, path: "/brands" },
   { name: "Users", icon: FiUser, path: "/users" },
   { name: "Orders", icon: FiTruck, path: "/orders" },
+  { name: "Sliders", icon: FiFastForward, path: "/sliders" },
   { name: "Store Data", icon: FiSettings, path: "/store-data" },
 ];
 

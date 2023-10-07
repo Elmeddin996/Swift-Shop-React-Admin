@@ -18,6 +18,9 @@ import { ProductProvider } from "../context/ProductContext";
 import { ProductCreate } from "../app/ProductCreate";
 import { OrderProvider } from "../context/OrderContext";
 import { ProductEdit } from "../app/ProductEdit";
+import { Sliders } from "../app/Sliders";
+import { SliderProvider } from "../context/SliderContext";
+import { SliderCreateEdit } from "../app/SliderCreateEdit";
 
 export const AdminRoutes: React.FC = () => {
   return (
@@ -111,6 +114,38 @@ export const AdminRoutes: React.FC = () => {
           </SidebarWithHeader>
         }
       />
+
+      <Route
+        path={ROUTES.SLIDER.LIST}
+        element={
+          <SidebarWithHeader>
+            <SliderProvider>
+              <Sliders />
+            </SliderProvider>
+          </SidebarWithHeader>
+        }
+      />
+
+      <Route path={ROUTES.SLIDER.CREATE}
+      element={
+        <SidebarWithHeader>
+            <SliderProvider>
+              <SliderCreateEdit />
+            </SliderProvider>
+          </SidebarWithHeader>
+      } />
+
+      <Route
+        path={`${ROUTES.SLIDER.EDIT}/:id`}
+        element={
+          <SidebarWithHeader>
+            <SliderProvider>
+              <SliderCreateEdit />
+            </SliderProvider>
+          </SidebarWithHeader>
+        }
+      />
+
       <Route
         path={ROUTES.STORE_DATA.LIST}
         element={

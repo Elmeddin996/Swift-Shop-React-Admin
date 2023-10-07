@@ -23,7 +23,9 @@ export const ROUTES={
         EDIT:"/store-data-edit"
     },
     SLIDER:{
-        LIST:"/sliders"
+        LIST:"/sliders",
+        CREATE:"/slider-create",
+        EDIT:"/slider-edit"
     },
    
 }

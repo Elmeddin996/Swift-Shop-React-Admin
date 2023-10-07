@@ -22,4 +22,13 @@ export class OrderService extends HttpClient {
       },
     });
   }
+
+  async deleteOrder(id:number){
+    const token = localStorage.getItem("adminToken");
+    return await this.delete(`Orders`, id, {
+      headers: {
+        Authorization: `Bearer  ${token}`,
+      },
+    });
+  }
 }
