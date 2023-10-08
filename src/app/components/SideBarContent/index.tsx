@@ -70,7 +70,7 @@ export const SidebarContent: React.FC<ISidebarProps> = ({
         <img
           src={storeDatas?.data.logoImageLink}
           alt="logo"
-          style={{ width: "30%" }}
+          style={{ maxWidth: "18%" }}
         />
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
           {storeDatas?.data.logoText}

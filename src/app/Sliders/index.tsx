@@ -16,9 +16,10 @@ import { Pagination } from '../components/Pagination';
 import { ISlider } from '../../models';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/consts';
+import Swal from 'sweetalert2';
 
 export const Sliders:React.FC = () => {
-  const{sliderList}=useSliderContext();
+  const{sliderList, mutateDeleteSlider}=useSliderContext();
   const navigate=useNavigate()
 
   const [activePage, setActivePage] = React.useState<number>(1);
@@ -30,7 +31,22 @@ export const Sliders:React.FC = () => {
     setActivePage(page);
   };
 
-  console.log(sliderList?.data);
+  const handleDelete=(id:number)=>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You can't take it back!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#506ba5",
+      cancelButtonColor: "#f16969",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Slider has been deleted.", "success");
+        mutateDeleteSlider(id).catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
+      }
+    });
+  }
 
   return (
     <div>
@@ -80,7 +96,7 @@ export const Sliders:React.FC = () => {
                     </Button>
                     <Button
                       className="detail-btn"
-                      onClick={() =>{}}
+                      onClick={() =>handleDelete(slider.id)}
                     >
                       Delete
                     </Button>
@@ -96,6 +112,7 @@ export const Sliders:React.FC = () => {
           onPageChange={handlePageChange}
         />
       </TableContainer>
+
     </div>
   )
 }

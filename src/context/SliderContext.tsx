@@ -18,6 +18,7 @@ interface ISliderContext {
     unknown
   >;
   mutateEditSlider: UseMutateAsyncFunction<any, any, any>;
+  mutateDeleteSlider: UseMutateAsyncFunction<any, any, any>;
 }
 
 export const SliderContext = React.createContext<ISliderContext>(null as any);
@@ -46,9 +47,17 @@ export const SliderProvider: React.FC<any> = ({ children }: any) => {
     }
   );
 
+  const { mutateAsync: mutateDeleteSlider } = useMutation(
+    (id:number) => sliderService.deleteSlider(id),
+    {
+      onSuccess: () =>
+        queryClient.invalidateQueries([EQueryKeys.GET_SLIDER_LIST]),
+    }
+  );
+
   return (
     <SliderContext.Provider
-      value={{ sliderList, mutateCreateSlider, mutateEditSlider }}
+      value={{ sliderList, mutateCreateSlider, mutateEditSlider,mutateDeleteSlider }}
     >
       {children}
     </SliderContext.Provider>

@@ -28,11 +28,9 @@ type FormValues = {
 
 const schema = Nope.object().shape({
   title: Nope.string()
-    .max(20, "Title length should be maximum 20")
-    .required("Title is required."),
+    .max(20, "Title length should be maximum 20"),
   desc: Nope.string()
     .max(150, "Description length should be maximum 150")
-    .required("Description is required."),
 });
 
 export const SliderCreateEdit: React.FC = () => {

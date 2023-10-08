@@ -41,13 +41,13 @@ export class SliderService extends HttpClient {
     });
   }
 
-  // async deleteProduct(id: number) {
-  //   const token = localStorage.getItem("adminToken");
-  //   return await this.delete("Products", id, {
-  //     headers: {
-  //       Authorization: `Bearer  ${token}`,
-  //     },
-  //   });
-  // }
+  async deleteSlider(id: number) {
+    const token = localStorage.getItem("adminToken");
+    return await this.delete("Sliders", id, {
+      headers: {
+        Authorization: `Bearer  ${token}`,
+      },
+    });
+  }
 
 }
