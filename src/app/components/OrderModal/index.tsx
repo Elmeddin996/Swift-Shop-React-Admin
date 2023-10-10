@@ -13,9 +13,10 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
-import { IOrder} from "../../../models";
+import { IOrder } from "../../../models";
 import { useOrderContext } from "../../../hooks";
 import Swal from "sweetalert2";
+import "./style.scss"
 
 interface IOrderModal {
   order: IOrder;
@@ -42,7 +43,7 @@ export const OrderModal: React.FC<IOrderModal> = ({
       status: selectedValue,
     };
     Swal.fire("Changed!", "Order Status has been changed.", "success");
-    mutateEditOrder(reqBody).catch((err) => console.log(err));
+    mutateEditOrder(reqBody).catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
     onClose();
   };
 
@@ -54,6 +55,17 @@ export const OrderModal: React.FC<IOrderModal> = ({
       backdropBlur="1px"
     />
   );
+
+  const createdAt = new Date(order.createdAt);
+  const formattedDate = `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${createdAt
+    .getDate()
+    .toString()
+    .padStart(2, "0")} ${createdAt
+    .getHours()
+    .toString()
+    .padStart(2, "0")}:${createdAt.getMinutes().toString().padStart(2, "0")}`;
 
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -67,7 +79,7 @@ export const OrderModal: React.FC<IOrderModal> = ({
           </Text>
           <Divider />
           <Text>
-            <span>Ordered Time: </span> {order?.createdAt}
+            <span>Ordered Time: </span> {formattedDate}
           </Text>
           <Divider />
           <Text>
@@ -95,10 +107,13 @@ export const OrderModal: React.FC<IOrderModal> = ({
             )}
           </Box>
           <Divider />
-          <Text>{order?.note}</Text>
+          <Text><span>Note: </span>{order?.note}</Text>
           <Divider />
-          {order.orderItems.map((item,index) => (
-            <Text key={index}><span>{item.productName}</span>x{item.count}</Text>
+          {order.orderItems.map((item, index) => (
+            <Text key={index} className="product-in-order">
+              <span>{item.productName} </span>
+              <span>x{item.count}</span>
+            </Text>
           ))}
         </ModalBody>
         <ModalFooter className="modal-footer">

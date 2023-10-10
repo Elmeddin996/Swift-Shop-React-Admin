@@ -58,7 +58,7 @@ export const ModalDetail: React.FC<IModal> = ({ user, isOpen, onClose }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "User has been deleted.", "success");
-        mutateDeleteUser(email).catch((err) => console.log(err));
+        mutateDeleteUser(email).catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
       }
     });
     onClose();

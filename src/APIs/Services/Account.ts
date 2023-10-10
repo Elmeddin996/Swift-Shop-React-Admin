@@ -13,41 +13,21 @@ export class AccountService extends HttpClient {
   }
 
   async logout() {
-    const token = localStorage.getItem("adminToken");
-    return await this.get(`Auth/Logout`, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    }).then(() => {
+    return await this.get(`Auth/Logout`).then(() => {
       localStorage.removeItem("adminToken");
       localStorage.removeItem("adminUserId");
     });
   }
 
   async users() {
-    const token = localStorage.getItem("adminToken");
-    return await this.get(`Auth/AllUsers`, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.get(`Auth/AllUsers`);
   }
 
   async userData() {
-    const token = localStorage.getItem("adminToken");
-    return await this.get(`Auth/UserData`, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.get(`Auth/UserData`);
   }
 
   async deleteUser(email: string) {
-    const token = localStorage.getItem("adminToken");
-    return await this.delete(`Auth`, email, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.delete(`Auth`, email);
   }
 }

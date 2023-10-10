@@ -21,6 +21,7 @@ import { ProductEdit } from "../app/ProductEdit";
 import { Sliders } from "../app/Sliders";
 import { SliderProvider } from "../context/SliderContext";
 import { SliderCreateEdit } from "../app/SliderCreateEdit";
+import { ProtectedRouter } from "../ProtectedRouters/ProtectedRouter";
 
 export const AdminRoutes: React.FC = () => {
   return (
@@ -38,120 +39,157 @@ export const AdminRoutes: React.FC = () => {
       <Route
         path={ROUTES.DASHBOARD}
         element={
-          <SidebarWithHeader>
-            <Dashboard />
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <Dashboard />
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
       <Route
         path={ROUTES.PRODUCT.LIST}
         element={
-          <SidebarWithHeader>
-            <ProductProvider>
-              <Products />
-            </ProductProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <ProductProvider>
+                <Products />
+              </ProductProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
 
       <Route
         path={ROUTES.PRODUCT.CREATE}
         element={
-          <SidebarWithHeader>
-            <ProductProvider>
-              <ProductCreate />
-            </ProductProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <ProductProvider>
+                <ProductCreate />
+              </ProductProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
       <Route
         path={`${ROUTES.PRODUCT.EDIT}/:id`}
         element={
-          <SidebarWithHeader>
-            <ProductProvider>
-              <ProductEdit />
-            </ProductProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <ProductProvider>
+                <ProductEdit />
+              </ProductProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
       <Route
         path={ROUTES.CATEGORY.LIST}
         element={
-          <SidebarWithHeader>
-            <CategoryProvider>
-              <Categories />
-            </CategoryProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <CategoryProvider>
+                <Categories />
+              </CategoryProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
       <Route
         path={ROUTES.BRAND.LIST}
         element={
-          <SidebarWithHeader>
-            <BrandProvider>
-              <Brands />
-            </BrandProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <BrandProvider>
+                <Brands />
+              </BrandProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
       <Route
         path={ROUTES.USER.LIST}
         element={
-          <SidebarWithHeader>
-            <AccountProvider>
-              <Users />
-            </AccountProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <AccountProvider>
+                <Users />
+              </AccountProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
       <Route
         path={ROUTES.ORDER.LIST}
         element={
-          <SidebarWithHeader>
-            <OrderProvider>
-              <Orders />
-            </OrderProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <OrderProvider>
+                <Orders />
+              </OrderProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
 
       <Route
         path={ROUTES.SLIDER.LIST}
         element={
-          <SidebarWithHeader>
-            <SliderProvider>
-              <Sliders />
-            </SliderProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <SliderProvider>
+                <Sliders />
+              </SliderProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
 
-      <Route path={ROUTES.SLIDER.CREATE}
-      element={
-        <SidebarWithHeader>
-            <SliderProvider>
-              <SliderCreateEdit />
-            </SliderProvider>
-          </SidebarWithHeader>
-      } />
+      <Route
+        path={ROUTES.SLIDER.CREATE}
+        element={
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <SliderProvider>
+                <SliderCreateEdit />
+              </SliderProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
+        }
+      />
 
       <Route
         path={`${ROUTES.SLIDER.EDIT}/:id`}
         element={
-          <SidebarWithHeader>
-            <SliderProvider>
-              <SliderCreateEdit />
-            </SliderProvider>
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <SliderProvider>
+                <SliderCreateEdit />
+              </SliderProvider>
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
 
       <Route
         path={ROUTES.STORE_DATA.LIST}
         element={
-          <SidebarWithHeader>
-            <StoreDatas />
-          </SidebarWithHeader>
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <StoreDatas />
+            </SidebarWithHeader>
+          </ProtectedRouter>
+        }
+      />
+
+<Route
+        path="*"
+                element={
+          <ProtectedRouter>
+            <SidebarWithHeader>
+              <Dashboard />
+            </SidebarWithHeader>
+          </ProtectedRouter>
         }
       />
     </Routes>

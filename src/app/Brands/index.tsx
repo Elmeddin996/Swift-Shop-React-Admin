@@ -46,7 +46,7 @@ export const Brands = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "Brand has been deleted.", "success");
-        mutateDeleteBrand(id).catch((err) => console.log(err));
+        mutateDeleteBrand(id).catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
       }
     });
   };

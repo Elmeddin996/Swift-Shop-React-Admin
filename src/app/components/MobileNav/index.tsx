@@ -19,6 +19,7 @@ import { useService } from "../../../APIs/Services";
 import { ROUTES } from "../../../routes/consts";
 import { useNavigate } from "react-router-dom";
 import { EQueryKeys } from "../../../enums";
+import Swal from "sweetalert2";
 
 interface IMobileProps extends FlexProps {
   onOpen: () => void;
@@ -35,7 +36,7 @@ export const MobileNav: React.FC<IMobileProps> = ({ onOpen, ...rest }) => {
   const handleLogout = () => {
     mutateLogout()
       .then(() => navigate(ROUTES.LOGIN))
-      .catch((err) => console.log(err));
+      .catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
   };
 
   const { data: user } = useQuery([EQueryKeys.GET_USER], () =>

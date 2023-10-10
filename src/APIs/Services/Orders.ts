@@ -6,29 +6,14 @@ export class OrderService extends HttpClient {
   }
 
   async getOrderList() {
-    const token = localStorage.getItem("adminToken");
-    return await this.get("Orders/All", {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.get("Orders/All");
   }
 
   async editOrder(body: Object) {
-    const token = localStorage.getItem("adminToken");
-    return await this.put(`Orders/Edit`, body, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.put(`Orders/Edit`, body);
   }
 
   async deleteOrder(id:number){
-    const token = localStorage.getItem("adminToken");
-    return await this.delete(`Orders`, id, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.delete(`Orders`, id);
   }
 }

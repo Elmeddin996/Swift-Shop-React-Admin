@@ -6,48 +6,23 @@ export class ProductService extends HttpClient {
   }
 
   async getProductList() {
-    const token = localStorage.getItem("adminToken");
-    return await this.get("Products/all", {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.get("Products/all");
   }
 
   async getProduct(id:string){
-    const token = localStorage.getItem("adminToken");
-   return await this.getById("Products/GetAdmin", id, {
-    headers: {
-      Authorization: `Bearer  ${token}`,
-    },
-  });
+   return await this.getById("Products/GetAdmin", id);
   }
 
   async createProduct(body: FormData) {
-    const token = localStorage.getItem("adminToken");
-    return await this.postWithToken("Products", body, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.postWithToken("Products", body);
   }
 
   async editProduct(body: FormData) {
-    const token = localStorage.getItem("adminToken");
-    return await this.put("Products/Edit", body, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.put("Products/Edit", body);
   }
 
   async deleteProduct(id: number) {
-    const token = localStorage.getItem("adminToken");
-    return await this.delete("Products", id, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.delete("Products", id);
   }
 
 }

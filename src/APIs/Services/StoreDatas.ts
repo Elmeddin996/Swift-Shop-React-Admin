@@ -5,20 +5,10 @@ export class StoreDataService extends HttpClient {
     super(`https://localhost:7267/api`);
   }
   async getSiteDatas() {
-    const token = localStorage.getItem("adminToken");
-    return await this.get("StoreDatas/Get", {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.get("StoreDatas/Get");
   }
 
   async editStoreData(body: FormData) {
-    const token = localStorage.getItem("adminToken");
-    return await this.put("StoreDatas/Edit", body, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.put("StoreDatas/Edit", body);
   }
 }

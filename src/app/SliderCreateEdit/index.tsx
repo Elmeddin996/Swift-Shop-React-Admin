@@ -28,7 +28,7 @@ type FormValues = {
 
 const schema = Nope.object().shape({
   title: Nope.string()
-    .max(20, "Title length should be maximum 20"),
+    .max(30, "Title length should be maximum 30"),
   desc: Nope.string()
     .max(150, "Description length should be maximum 150")
 });

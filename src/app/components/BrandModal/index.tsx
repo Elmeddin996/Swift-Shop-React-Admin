@@ -65,7 +65,7 @@ export const BrandModal: React.FC<IModal> = ({
         .then(() =>
           Swal.fire("Changed!", "Data changed successfully.", "success")
         )
-        .catch((err) => console.log(err));
+       .catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
     } else {
       const reqBody = {
         name: data.name,
@@ -75,7 +75,7 @@ export const BrandModal: React.FC<IModal> = ({
         .then(() =>
           Swal.fire("Created!", "Data created successfully.", "success")
         )
-        .catch((err) => console.log(err));
+       .catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
     }
   };
 

@@ -7,36 +7,18 @@ export class CategoryService extends HttpClient {
   }
 
   async getCategoryList(){
-   const token=localStorage.getItem("adminToken")
-    return await this.get('Categories/all',{headers: {
-      Authorization: `Bearer  ${token}`
-    }})
+    return await this.get('Categories/all')
   }
 
   async createCategory(body: Object) {
-    const token = localStorage.getItem("adminToken");
-    return await this.postWithToken("Categories", body, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.postWithToken("Categories", body);
   }
 
   async editCategory(body: ICategory) {
-    const token = localStorage.getItem("adminToken");
-    return await this.put(`Categories/Edit`, body, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.put(`Categories/Edit`, body);
   }
 
   async deleteCategory(id: number) {
-    const token = localStorage.getItem("adminToken");
-    return await this.delete(`Categories`, id, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.delete(`Categories`, id);
   }
 }

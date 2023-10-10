@@ -10,8 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { useAuthentication } from "../../hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
-import "./style.scss"
+import "./style.scss";
 import { ILogin } from "../../models";
+import Swal from "sweetalert2";
 
 type Inputs = {
   email: string;
@@ -25,8 +26,11 @@ export const Login: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  
-  const onSubmit: SubmitHandler<Inputs> = (data:ILogin) => mutateLogin(data).catch((err)=>console.log(err))
+
+  const onSubmit: SubmitHandler<Inputs> = (data: ILogin) =>
+    mutateLogin(data).catch(() =>
+      Swal.fire("Error!", "Email or Password is incorrect!", "error")
+    );
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Flex flex={1}>
@@ -44,28 +48,51 @@ export const Login: React.FC = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" placeholder="Email address" {...register("email", { required: "Email is required", minLength:{
-                value:8,
-                message:"Enter a valid email!"
-              }  })}/>
-              
+              <Input
+                type="email"
+                placeholder="Email address"
+                {...register("email", {
+                  required: "Email is required",
+                  minLength: {
+                    value: 8,
+                    message: "Enter a valid email!",
+                  },
+                })}
+              />
             </FormControl>
-            {errors.email?<p className="error-messages">{errors.email?.message}</p>:<br/>}
-            
+            {errors.email ? (
+              <p className="error-messages">{errors.email?.message}</p>
+            ) : (
+              <br />
+            )}
+
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" placeholder="Password" {...register("password", { required: "Password is required!", minLength:{
-                value:8,
-                message:"Password must be at least 8 characters!"
-              }  })}/>
+              <Input
+                type="password"
+                placeholder="Password"
+                {...register("password", {
+                  required: "Password is required!",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters!",
+                  },
+                })}
+              />
             </FormControl>
-            {errors.password?<p className="error-messages">{errors.password?.message}</p>:<br/>}
+            {errors.password ? (
+              <p className="error-messages">{errors.password?.message}</p>
+            ) : (
+              <br />
+            )}
             <Stack spacing={6}>
               <Button colorScheme={"blue"} variant={"solid"} type="submit">
                 Sign in
               </Button>
             </Stack>
-            {result==="error"&&<p className="error-messages">Email or Password is incorrect!</p>}
+            {result === "error" && (
+              <p className="error-messages">Email or Password is incorrect!</p>
+            )}
           </form>
         </Stack>
       </Flex>

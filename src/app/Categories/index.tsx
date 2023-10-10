@@ -46,7 +46,7 @@ export const Categories = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "Category has been deleted.", "success");
-        mutateDeleteCategory(id).catch((err) => console.log(err));
+        mutateDeleteCategory(id).catch(()=>Swal.fire("Error!", "Something is wrong.", "error"));
       }
     });
   };

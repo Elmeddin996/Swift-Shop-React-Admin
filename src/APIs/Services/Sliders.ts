@@ -6,48 +6,23 @@ export class SliderService extends HttpClient {
   }
 
   async getSliders (){
-    const token = localStorage.getItem("adminToken");
-    return await this.get("Sliders/all", {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.get("Sliders/all");
   }
 
   async getSlider(id:string){
-    const token = localStorage.getItem("adminToken");
-   return await this.getById("Sliders", id, {
-    headers: {
-      Authorization: `Bearer  ${token}`,
-    },
-  });
+   return await this.getById("Sliders", id);
   }
 
   async createSlider(body: FormData) {
-    const token = localStorage.getItem("adminToken");
-    return await this.postWithToken("Sliders", body, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.postWithToken("Sliders", body);
   }
 
   async editSlider(body: FormData) {
-    const token = localStorage.getItem("adminToken");
-    return await this.put("Sliders/Edit", body, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.put("Sliders/Edit", body);
   }
 
   async deleteSlider(id: number) {
-    const token = localStorage.getItem("adminToken");
-    return await this.delete("Sliders", id, {
-      headers: {
-        Authorization: `Bearer  ${token}`,
-      },
-    });
+    return await this.delete("Sliders", id);
   }
 
 }
