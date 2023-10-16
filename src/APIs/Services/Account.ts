@@ -3,7 +3,7 @@ import { HttpClient } from "../HTTPClients";
 
 export class AccountService extends HttpClient {
   constructor() {
-    super(`https://localhost:7267/api`);
+    super(`http://elmeddin96-001-site1.htempurl.com/api`);
   }
   async login(body: ILogin) {
     return await this.post(`Auth/loginadmin`, body).then(({ data }) => {
